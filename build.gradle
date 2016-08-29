@@ -1,0 +1,32 @@
+group 'com.pirack.dropwizard'
+version '0.1-SNAPSHOT'
+
+apply plugin: 'scala'
+apply plugin: 'maven'
+
+sourceCompatibility = 1.8
+
+project.ext {
+    dropwizardVersion = '1.0.0'
+    freemarkerVersion = '2.3.23'
+    scalaVersion= '2.10.6'
+}
+
+jar {
+    exclude "services"
+    from ("src/main/resources/services") {
+        into ("META-INF/services")
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+
+    compile group: 'io.dropwizard', name: 'dropwizard-views', version: dropwizardVersion
+    compile group: 'org.freemarker', name: 'freemarker', version: freemarkerVersion
+    compile group: 'org.scala-lang', name: 'scala-library', version: scalaVersion
+}
